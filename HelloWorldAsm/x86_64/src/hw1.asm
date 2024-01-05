@@ -7,7 +7,7 @@ _start:
   mov rax, 1        ; write(
   mov rdi, 1        ;   STDOUT_FILENO,
   mov rsi, msg      ;   "Hello, world!\n",
-  mov rdx, msg.len   ;   sizeof("Hello, world!\n")
+  mov rdx, msg.len  ;   strlen("Hello, world!\n")
   syscall           ; );
 
   mov rax, 60       ; exit(

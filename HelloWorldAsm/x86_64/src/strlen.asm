@@ -45,6 +45,6 @@ mov rdi, 0        ;   EXIT_SUCCESS
 syscall           ; );
 
 section .data
-msg:    db  "Wello, horld!",0x0,10
+msg:    db  "Wello, horld!",10,0x0
 section .rodata
-msg2:    db  "Hello, world!",0xA;
+msg2:    db  "Hello, world!",0xA,0x0;

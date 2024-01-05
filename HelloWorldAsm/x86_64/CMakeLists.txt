@@ -63,7 +63,7 @@ target_compile_options(${EXECUTABLE}
 file(GLOB TARGET_HEADERS "src/*.h")
 file(GLOB TARGET_SOURCES "src/syscall.c")
 set(EXECUTABLE syscall)
-set(TARGET_LINK_FLAGS -w -lbsd -O0 -m64 -Wl,-melf_x86_64 )
+set(TARGET_LINK_FLAGS -w -lbsd -O0 -m64 -nostdlib -Wl,-melf_x86_64 )
 set(TARGET_CFLAGS
         -c
         -MMD
@@ -74,6 +74,7 @@ set(TARGET_CFLAGS
         -fdata-sections
         -g3
         -ggdb
+        -m64
         -O0)
 add_executable(${EXECUTABLE})
 target_sources(${EXECUTABLE} PRIVATE ${TARGET_HEADERS} ${TARGET_SOURCES})
@@ -85,3 +86,31 @@ target_compile_options(${EXECUTABLE}
         PRIVATE
         $<$<COMPILE_LANGUAGE:C>:
             ${TARGET_CFLAGS}>)
+
+
+file(GLOB TARGET_HEADERS "src/*.h")
+file(GLOB TARGET_SOURCES "src/main.c")
+set(EXECUTABLE main)
+set(TARGET_LINK_FLAGS -w -lbsd -O0 -m64 -Wl,-melf_x86_64 )
+set(TARGET_CFLAGS
+        -c
+        -MMD
+        -fcf-protection=none
+        -mmanual-endbr
+        -fno-exceptions
+        -ffunction-sections
+        -fdata-sections
+        -g3
+        -ggdb
+        -m64
+        -O0)
+add_executable(${EXECUTABLE})
+target_sources(${EXECUTABLE} PRIVATE ${TARGET_HEADERS} ${TARGET_SOURCES})
+target_link_options(${EXECUTABLE} PUBLIC ${TARGET_LINK_FLAGS})
+set_target_properties(${EXECUTABLE} PROPERTIES
+        LINKER_LANGUAGE C
+        RUNTIME_OUTPUT_DIRECTORY "${CMAKE_CURRENT_SOURCE_DIR}/bin")
+target_compile_options(${EXECUTABLE}
+        PRIVATE
+        $<$<COMPILE_LANGUAGE:C>:
+        ${TARGET_CFLAGS}>)
