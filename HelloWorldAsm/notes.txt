@@ -1,9 +1,9 @@
 #https://stackoverflow.com/questions/1685483
 You can get the RAW (not hexdump-ed) ELF section with:
     # To a file:
-    objcopy ../bin/strlen /dev/null --dump-section .text=text.data
+    objcopy ../bin/strlen /dev/null --dump-section .data=data.txt
     # To stdout:
-    objcopy ../bin/strlen /dev/null --dump-section .text=/dev/stdout | cat
+    objcopy ./hw1 /dev/null --dump-section .data=/dev/stdout | cat
 
 objdump -d -Mintel64,addr64 main -j .text
 objdump -d -Mintel-mnemonic hw1 -j .data  -m i386:x86-64:intel

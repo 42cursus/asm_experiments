@@ -45,3 +45,62 @@ target_compile_options(${EXECUTABLE}
             ${TARGET_ASM_NASM_FLAGS}>
         $<$<COMPILE_LANGUAGE:C>:
             ${TARGET_CFLAGS}>)
+
+
+file(GLOB TARGET_HEADERS "src/*.h")
+file(GLOB TARGET_SOURCES "src/syscall.c")
+set(EXECUTABLE syscall_i386)
+set(TARGET_LINK_FLAGS -w -lbsd -O0 -m32 -nostdlib -Wl,--build-id -Wl,-melf_i386)
+#https://stackoverflow.com/questions/14666665
+set(TARGET_CFLAGS
+        -c
+        -MMD -MD -MP -MF
+        -fcf-protection=none
+        -mmanual-endbr
+        -fno-exceptions
+        -ffunction-sections
+        -fdata-sections
+        -fomit-frame-pointer # Don't keep the frame pointer in a register for functions that don't need one.
+        -g3
+        -ggdb
+        -m32
+        -O0)
+add_executable(${EXECUTABLE})
+target_sources(${EXECUTABLE} PRIVATE ${TARGET_HEADERS} ${TARGET_SOURCES})
+target_link_options(${EXECUTABLE} PUBLIC ${TARGET_LINK_FLAGS})
+set_target_properties(${EXECUTABLE} PROPERTIES
+        LINKER_LANGUAGE C
+        RUNTIME_OUTPUT_DIRECTORY "${CMAKE_CURRENT_SOURCE_DIR}/bin")
+target_compile_options(${EXECUTABLE}
+        PRIVATE
+        $<$<COMPILE_LANGUAGE:C>:
+        ${TARGET_CFLAGS}>)
+
+file(GLOB TARGET_HEADERS "src/*.h")
+file(GLOB TARGET_SOURCES "src/write.c")
+set(EXECUTABLE write_i386)
+set(TARGET_LINK_FLAGS -w -lbsd -O0 -m32 -nostdlib -Wl,--build-id -Wl,-melf_i386)
+set(TARGET_CFLAGS
+        -c
+        -MMD
+        -fcf-protection=none
+        -mmanual-endbr
+        -fno-pic
+        -fno-exceptions
+        -ffunction-sections
+        -fdata-sections
+        -fomit-frame-pointer # Don't keep the frame pointer in a register for functions that don't need one.
+        -g3
+        -ggdb
+        -m32
+        -O0)
+add_executable(${EXECUTABLE})
+target_sources(${EXECUTABLE} PRIVATE ${TARGET_HEADERS} ${TARGET_SOURCES})
+target_link_options(${EXECUTABLE} PUBLIC ${TARGET_LINK_FLAGS})
+set_target_properties(${EXECUTABLE} PROPERTIES
+        LINKER_LANGUAGE C
+        RUNTIME_OUTPUT_DIRECTORY "${CMAKE_CURRENT_SOURCE_DIR}/bin")
+target_compile_options(${EXECUTABLE}
+        PRIVATE
+        $<$<COMPILE_LANGUAGE:C>:
+        ${TARGET_CFLAGS}>)

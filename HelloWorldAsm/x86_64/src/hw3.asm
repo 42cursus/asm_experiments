@@ -15,5 +15,5 @@ _start:
   syscall
 
 section .rodata
-  msg: db "Hello, World!", 10
-  .len: equ $ - msg
+msg: db "Hello, World!", 10
+.len: equ $ - msg
