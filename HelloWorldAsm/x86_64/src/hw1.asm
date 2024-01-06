@@ -17,4 +17,3 @@ _start:
 section .data
 msg:    db "Hello, World!",10 ;
 .len:   equ $ - msg
-

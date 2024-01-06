@@ -90,7 +90,7 @@ target_compile_options(${EXECUTABLE}
 
 file(GLOB TARGET_HEADERS "src/*.h")
 file(GLOB TARGET_SOURCES "src/main.c")
-set(EXECUTABLE main)
+set(EXECUTABLE main_x86_64)
 set(TARGET_LINK_FLAGS -w -lbsd -O0 -m64  -Wl,-melf_x86_64 )
 set(TARGET_CFLAGS
         -c

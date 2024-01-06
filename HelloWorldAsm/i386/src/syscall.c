@@ -24,9 +24,7 @@ int	*__errno_location(void)
 
 void	ft_exit(int exit_code)
 {
-	__asm__ volatile (
-		"int $0x80"
-		:: "a"(__NR_exit), "b"(exit_code));
+	__asm__ volatile ("int $0x80" :: "a"(__NR_exit), "b"(exit_code));
 }
 
 int	syscall3(int num, int arg1, long arg2, int arg3)
@@ -51,6 +49,8 @@ int	syscall3(int num, int arg1, long arg2, int arg3)
 		res = -1;
 		errno = -res;
 	}
+	else
+		res = 0;
 	return (res);
 }
 
@@ -58,10 +58,11 @@ void	_start(void)
 {
 	char	*str;
 	size_t	len;
+	int		exitcode;
 
 	/* write(STDOUT_FILENO,"Hey!\n", 5); */
 	str = "Wello Horld!\n";
 	len = 13; /* ft_strlen(str); */
-	syscall3(__NR_write, STDOUT_FILENO, (long)str, len);
-	ft_exit(0);
+	exitcode = syscall3(__NR_write, STDOUT_FILENO, (long)str, len);
+	ft_exit(exitcode);
 }

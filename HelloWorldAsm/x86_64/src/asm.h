@@ -1,25 +1,22 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   main.c                                             :+:      :+:    :+:   */
+/*   asm.h                                              :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
 /*   By: abelov <abelov@student.42london.com>       +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2024/01/06 17:17:44 by abelov            #+#    #+#             */
-/*   Updated: 2024/01/06 17:17:46 by abelov           ###   ########.fr       */
+/*   Created: 2024/01/06 17:59:14 by abelov            #+#    #+#             */
+/*   Updated: 2024/01/06 17:59:16 by abelov           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
-#include "asm.h"
+#ifndef ASM_H
+# define ASM_H
+# define _GNU_SOURCE
+# include <errno.h>
+# include <unistd.h>
+# include <sys/syscall.h>
+# include <string.h>
+# define STRINGIFY(x) __STRING(x)
 
-int	main(void)
-{
-	char	*str;
-	size_t	len;
-
-	str = "Wello Horld!\n";
-	len = strlen(str);
-	/* write(STDOUT_FILENO,"Hey!\n", 5); */
-	syscall(SYS_write, STDOUT_FILENO, str, len);
-	return (0);
-}
+#endif //ASM_H
