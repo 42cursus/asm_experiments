@@ -14,7 +14,7 @@
 #include <asm/unistd.h>
 #include <unistd.h>
 
-extern size_t _strlen2 (const char *s);
+extern size_t	_strlen2(const char *s);
 
 void	ft_exit(int exit_code)
 {
@@ -30,9 +30,17 @@ ssize_t	ft_write(int fd, const char *buf, size_t size)
 		: "=a" (ret)
 		/*                 EDI      RSI       RDX */
 		: "0"(__NR_write), "D"(fd), "S"(buf), "d"(size)
-		: "rcx", "r11", "memory"
-		);
+		: "rcx", "r11", "memory");
 	return (ret);
+}
+
+void	ft_add_and_copy(int dst, int src)
+{
+	__asm__ ("mov %1, %0\n\t"
+		"add $1, %0"
+		: "=r" (dst)
+		: "r" (src)
+		: "cc");
 }
 
 void	_start(void)

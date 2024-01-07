@@ -27,6 +27,18 @@ void	ft_exit(int exit_code)
 	__asm__ volatile ("int $0x80" :: "a"(__NR_exit), "b"(exit_code));
 }
 
+/**
+ * https://gcc.gnu.org/onlinedocs/gcc/Constraints.html
+ * https://gcc.gnu.org/onlinedocs/gcc/Simple-Constraints.html
+ * https://gcc.gnu.org/onlinedocs/gcc/Modifiers.html
+ * https://gcc.gnu.org/onlinedocs/gcc/extensions-to-the-c-language-family
+ * 	/how-to-use-inline-assembly-language-in-c-code.html
+ * 	asm asm-qualifiers ( AssemblerTemplate
+                      : OutputOperands
+                      : InputOperands
+                      : Clobbers
+                      : GotoLabels)
+ */
 int	syscall3(int num, int arg1, long arg2, int arg3)
 {
 	int	res;

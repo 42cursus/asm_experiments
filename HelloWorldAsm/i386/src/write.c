@@ -13,6 +13,7 @@
 /* i385 Linux */
 #include <asm/unistd.h>
 #include <unistd.h>
+#include <stddef.h>
 
 /**
  * ft_strlen() - calculates the length of the string pointed to by s, excluding
@@ -22,10 +23,12 @@
 size_t __attribute__ ((noinline))	ft_strlen(const char *s)
 {
 	const char	*o = s;
+	ptrdiff_t	diff;
 
 	while (*s != '\0')
 		s++;
-	return (s - o);
+	diff = s - o;
+	return ((size_t)diff);
 }
 
 void	ft_exit(int exit_code)

@@ -51,29 +51,37 @@ int	ft_syscall3(int num, int arg1, long arg2, int arg3)
 	return (res);
 }
 
+/**
+ * https://git.musl-libc.org/cgit/musl/tree/arch/x86_64/syscall_arch.h
+ */
+static __inline__ __attribute__((always_inline)) __attribute__((unused))
+long	syscall4(long n, long a1, long a2, long a3, long a4)
+{
+	long				ret;
+	register long r10	__asm__("r10");
+
+	r10 = a4;
+	__asm__ volatile (
+		"syscall"
+		: "=a"(ret)
+		: "a"(n), "D"(a1), "S"(a2), "d"(a3), "r"(r10)
+		: "memory", "rcx", "r11");
+	return (ret);
+}
+
 void	ft_exit(int exit_code)
 {
 	__asm__ volatile ("syscall" :: "a" (__NR_exit), "D" (exit_code));
 	__asm__ volatile (
-		"movl $"STRINGIFY(SYS_exit)
-		",%eax\n\t"					/* ; exit(" */
-		"movl $0,%edi\n\t"			/* ;   EXIT_SUCCESS" */
-		"syscall");					/* ; );" */
+		"movl $"STRINGIFY(SYS_exit)",%eax\n\t" /* 	; exit(" */
+		"movl $0,%edi\n\t" /* 						;   EXIT_SUCCESS" */
+		"syscall"); /* 								; );" */
 	__asm__ volatile (
-		"movl %[syscall_number],%%eax\n\t"	/* ; exit(" */
-		"movl $0,%%edi\n\t"					/* ;   EXIT_SUCCESS" */
-		"syscall"							/* ; );" */
+		"movl %[syscall_number],%%eax\n\t" /*	; exit(" */
+		"movl $0,%%edi\n\t" /*					;   EXIT_SUCCESS" */
+		"syscall" /*							; );" */
 		:: [syscall_number] "r" (SYS_exit)
-		: "eax");							/* these registers are clobbered */
-}
-
-void	ft_add_and_copy(int dst, int src)
-{
-	__asm__ ("mov %1, %0\n\t"
-		"add $1, %0"
-		: "=r" (dst)
-		: "r" (src)
-		: "cc");
+		: "eax"); /* these registers are clobbered */
 }
 
 /**
