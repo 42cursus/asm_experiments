@@ -34,12 +34,13 @@ ssize_t	ft_write(int fd, const char *buf, size_t size)
 	return (ret);
 }
 
-void	ft_add_and_copy(int dst, int src)
+void	ft_add_and_copy(int *dst, int src)
 {
-	__asm__ ("mov %1, %0\n\t"
-		"add $1, %0"
-		: "=r" (dst)
-		: "r" (src)
+	__asm__ (
+		"add  %%eax, 1\n\t"
+		"mov [%2], %%eax"
+		: "=d" (dst)
+		: "a" (src), "d" (dst)
 		: "cc");
 }
 
@@ -47,7 +48,9 @@ void	_start(void)
 {
 	char	*str;
 	size_t	len;
+	int		dest;
 
+	ft_add_and_copy(&dest, 4);
 	str = "Wello Horld!\n";
 	len = _strlen2(str);
 	/* write(STDOUT_FILENO,"Hey!\n", 5); */

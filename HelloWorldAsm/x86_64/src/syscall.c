@@ -12,6 +12,17 @@
 
 #include "asm.h"
 
+__attribute__((target("arch=haswell")))
+int	ft_strlen(char *str)
+{
+	int cnt;
+
+	cnt = 0;
+	while (*str++)
+		cnt++;
+	return (cnt);
+}
+
 int	*__errno_location(void)
 {
 	static int	errnum;
@@ -93,7 +104,7 @@ void	_start(int argc, char *argv[])
 	size_t	len;
 
 	str = "Wello Horld!\n";
-	len = 13; /* ft_strlen(str); */
+	len = ft_strlen(str);
 	ft_syscall3(__NR_write, STDOUT_FILENO, (long)str, len);
 	ft_exit(0);
 }

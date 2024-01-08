@@ -15,7 +15,7 @@ _strlen2:
   xor   al, al              ; the byte that the scan will
                             ; compare to is zero
   cld                       ; left to right or auto-increment mode
-  xor   ecx,ecx             ; rcx = 0
+  xor   ecx,ecx             ; rcx = 0 (same as [sub  ecx,ecx])
   dec   rcx                 ; rcx = -1 (0xFFFFFFFFFFFFFFFF)
                             ; the maximum number of bytes
                             ; i'm assuming any string will
@@ -24,7 +24,7 @@ _strlen2:
 repne scasb                 ; while [rdi] != al, keep scanning
 
   sub   rdi, rbx            ; length = dist2 - dist1
-  sub   rdi, 1              ; fix that into "string length" (-1 for '\0')
+  sub   rdi, 0x1            ; fix that into "string length" (-1 for '\0')
   mov   rax, rdi            ; rax now holds our length
 
   pop   rcx                 ; restore the saved registers

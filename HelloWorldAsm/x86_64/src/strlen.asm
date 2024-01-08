@@ -35,7 +35,7 @@ _start:
                       ; ready for our write syscall
 
   ; write(fd, buf, len)
-  mov   rax, 1        ; syscall 4 == write
+  mov   rax, 1        ; syscall 1 == write
   mov   rdi, 1        ; fd = 1 == stdout
   mov   rsi, msg      ; rsi is the string we want to
   syscall             ; print the string

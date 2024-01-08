@@ -117,30 +117,38 @@ target_compile_options(${EXECUTABLE}
 
 set(EXECUTABLE write_x86_64)
 set(TARGET_ASM_FLAGS -gdwarf -Wall)
-set(TARGET_LINK_FLAGS -w -lbsd -O0 -m64 -nostdlib -Wl,-melf_x86_64 )
+set(TARGET_LINK_FLAGS -w -lbsd -O0 -m64 -nostdlib -nostartfiles -Wl,-melf_x86_64 )
 set(TARGET_CFLAGS
         -c
-        -MMD
+        -MMD -MD -MP -MF
         -fcf-protection=none
         -mmanual-endbr
         -fno-pic
         -fPIE
+        -masm=intel
         -fno-exceptions
         -ffunction-sections
         -fdata-sections
+        -fomit-frame-pointer
+        -fno-dwarf2-cfi-asm
+        -fno-asynchronous-unwind-tables
         -g3
-        -ggdb
+        -ggdb3
         -m64
-        -O1)
+        -O0
+        -Wa,-alh,-L)
 file(GLOB TARGET_HEADERS "src/*.h")
 file(GLOB TARGET_SOURCES "src/strlen2.asm")
 file(GLOB TARGET_CSOURCES "src/write.c")
 list (APPEND TARGET_SOURCES ${TARGET_CSOURCES})
 add_executable(${EXECUTABLE})
 target_sources(${EXECUTABLE} PRIVATE ${TARGET_HEADERS} ${TARGET_SOURCES})
-target_link_options(${EXECUTABLE} PUBLIC ${TARGET_LINK_FLAGS})
+target_link_options(${EXECUTABLE} PRIVATE ${TARGET_LINK_FLAGS})
 set_target_properties(${EXECUTABLE} PROPERTIES
-        LINKER_LANGUAGE C
+        LINKER_LANGUAGE ASM
+        C_STANDARD 90
+        C_EXTENSIONS ON # results in adding a flag such as -std=gnu90 instead of -std=c90
+        C_STANDARD_REQUIRED OFF
         RUNTIME_OUTPUT_DIRECTORY "${CMAKE_CURRENT_SOURCE_DIR}/bin")
 target_compile_options(${EXECUTABLE}
         PRIVATE
