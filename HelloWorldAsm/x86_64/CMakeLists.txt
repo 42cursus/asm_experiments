@@ -43,10 +43,29 @@ target_compile_options(${EXECUTABLE}
         $<$<COMPILE_LANGUAGE:C>:
             ${TARGET_CFLAGS}>)
 
+set(EXECUTABLE strlen_x86_64)
 set(TARGET_ASM_FLAGS -gdwarf -Wall)
 file(GLOB TARGET_HEADERS "src/*.h")
 file(GLOB TARGET_SOURCES "src/strlen.asm")
-set(EXECUTABLE strlen)
+set(TARGET_CFLAGS
+        -c
+        -MMD -MD -MP -MF
+        -fcf-protection=none
+        -mmanual-endbr
+        -fno-pic
+        -fPIE
+        -masm=intel
+        -fno-exceptions
+        -ffunction-sections
+        -fdata-sections
+        -fomit-frame-pointer
+        -fno-dwarf2-cfi-asm
+        -fno-asynchronous-unwind-tables
+        -g3
+        -ggdb3
+        -m64
+        -O0
+        -Wa,-alh,-L)
 add_executable(${EXECUTABLE})
 target_sources(${EXECUTABLE} PRIVATE ${TARGET_HEADERS} ${TARGET_SOURCES})
 target_link_options(${EXECUTABLE} PUBLIC ${TARGET_LINK_FLAGS})
@@ -63,7 +82,7 @@ target_compile_options(${EXECUTABLE}
 file(GLOB TARGET_HEADERS "src/*.h")
 file(GLOB TARGET_SOURCES "src/syscall.c")
 set(EXECUTABLE syscall_x86_64)
-set(TARGET_LINK_FLAGS -w -lbsd -O0 -m64 -nostdlib -Wl,-melf_x86_64 )
+set(TARGET_LINK_FLAGS -w -lbsd -O0 -m64 -nostdlib -Wl,-melf_x86_64)
 set(TARGET_CFLAGS
         -c
         -MMD
@@ -91,15 +110,19 @@ target_compile_options(${EXECUTABLE}
 file(GLOB TARGET_HEADERS "src/*.h")
 file(GLOB TARGET_SOURCES "src/main.c")
 set(EXECUTABLE main_x86_64)
-set(TARGET_LINK_FLAGS -w -lbsd -O0 -m64  -Wl,-melf_x86_64 )
+set(TARGET_LINK_FLAGS -w -lbsd -O0 -m64 -Wl,-melf_x86_64 )
 set(TARGET_CFLAGS
         -c
         -MMD
         -fcf-protection=none
         -mmanual-endbr
-        -fno-exceptions
+        -mno-red-zone
         -ffunction-sections
         -fdata-sections
+        -fomit-frame-pointer
+        -fno-exceptions
+        -fno-dwarf2-cfi-asm
+        -fno-asynchronous-unwind-tables
         -g3
         -ggdb
         -m64

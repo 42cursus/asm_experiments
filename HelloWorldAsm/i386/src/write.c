@@ -38,6 +38,13 @@ void	ft_exit(int exit_code)
 		:: "a"(__NR_exit), "b"(exit_code));
 }
 
+/**
+ * ebp - 8 : second local
+ * ebp - 4 : first local
+ * ebp     : saved ebp
+ * ebp + 4 : return address
+ * ebp + 8 : pushed parameter
+ */
 ssize_t	ft_write(int fd, const void *buf, size_t size)
 {
 	ssize_t	ret;
