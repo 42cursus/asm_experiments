@@ -86,4 +86,20 @@ While using constraints, for more precise control over the effects of constraint
     "=" : Means that this operand is write-only for this instruction; the previous value is discarded and replaced by output data.
     "&" : Means that this operand is an earlyclobber operand, which is modified before the instruction is finished using the input operands. Therefore, this operand may not lie in a register that is used as an input operand or as part of any memory address. An input operand can be tied to an earlyclobber operand if its only use as an input occurs before the early result is written.
 
-    The list and explanation of constraints is by no means complete. Examples can give a better understanding of the use and usage of inline asm. In the next section we’ll see some examples, there we’ll find more about clobber-lists and constraints. 
+    The list and explanation of constraints is by no means complete. Examples can give a better understanding of the use and usage of inline asm. In the next section we’ll see some examples, there we’ll find more about clobber-lists and constraints.
+
+### Some useful commands 
+
+`gcc -S 
+    -m32 
+    -mmanual-endbr 
+    -fPIE
+    -fno-pic
+    -fcf-protection=none
+    -fno-dwarf2-cfi-asm
+    -fno-omit-frame-pointer
+    -fno-asynchronous-unwind-tables
+    -Wa,-alh,-L
+    -Wl,-znoexecstack
+    -Wl,-znoexecflags
+    -O0 main.c`

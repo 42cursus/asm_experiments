@@ -15,7 +15,7 @@ set(CMAKE_ASM_NASM_OBJECT_FORMAT elf64)
 
 set(CMAKE_C_FLAGS "${CMAKE_C_FLAGS} -m64")
 enable_language(ASM_NASM)
-project(hw_x86_64 LANGUAGES C ASM_NASM)
+project(hw_x86_64 LANGUAGES C CXX ASM ASM_NASM)
 
 file(GLOB TARGET_HEADERS "src/*.h")
 file(GLOB TARGET_SOURCES "src/hw1.asm")
@@ -116,10 +116,10 @@ set(TARGET_CFLAGS
         -MMD
         -fcf-protection=none
         -mmanual-endbr
-        -mno-red-zone
+#        -mno-red-zone
         -ffunction-sections
         -fdata-sections
-        -fomit-frame-pointer
+#        -fomit-frame-pointer
         -fno-exceptions
         -fno-dwarf2-cfi-asm
         -fno-asynchronous-unwind-tables

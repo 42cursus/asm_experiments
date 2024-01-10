@@ -25,17 +25,17 @@ directory ~/staging/glibc-2.31/sysdeps/x86_64/multiarch
 directory ~/git/c/coreutils/src
 dir src
 set breakpoint pending on
-# br _start
-# br _dl_start
-# br _dl_start_final
-# br _dl_start_user
-# br _dl_init
-# br _init
-# br dl-sysdep.c:117
-# br dl-sysdep.c:252
-# br rtld.c:449
-# br dl-init:118
-# br check_stdfiles_vtables
+br _start
+br _dl_start
+br _dl_start_final
+br _dl_start_user
+br _dl_init
+br _init
+br dl-sysdep.c:117
+br dl-sysdep.c:252
+br rtld.c:449
+br dl-init:118
+br check_stdfiles_vtables
 br _start
 br libc-start.c:308
 br libc-start.c:339
