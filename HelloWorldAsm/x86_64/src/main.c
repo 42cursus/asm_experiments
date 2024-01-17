@@ -11,6 +11,7 @@
 /* ************************************************************************** */
 
 #include "asm.h"
+#include <stdlib.h>
 
 /**
  * https://people.cs.rutgers.edu/~pxk/419/notes/frames.html
@@ -88,12 +89,31 @@ size_t myfcn(char *s, int d)
 	return (len);
 }
 
+/**
+ * https://gcc.gnu.org/onlinedocs/gcc/Machine-Constraints.html
+ */
+size_t ft_strlen(const char *s)
+{
+	size_t			len;
+
+	__asm__ (
+			"repnz	scasb\n\t"
+			"not	%%ecx"
+			: "=c" (len)
+			: "a" ('\0'), "D" (s), "c" (-1)
+			: "cc");
+	return (len - 1);
+}
+
 int	main(void)
 {
 	char	*str;
+	size_t len;
 
 	str = "Wello Horld!\n";
+	len = ft_strlen(str);
 	/* write(STDOUT_FILENO,"Hey!\n", 5); */
-	syscall(SYS_write, STDOUT_FILENO, str, myfcn(str, 5));
-	return (0);
+	syscall(SYS_write, STDOUT_FILENO, str, len);
+	/* syscall(SYS_write, STDOUT_FILENO, str, myfcn(str, 5)); */
+	return (EXIT_SUCCESS);
 }

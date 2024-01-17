@@ -11,6 +11,7 @@
 /* ************************************************************************** */
 
 #include "asm.h"
+#include <sysexits.h>
 
 __attribute__((target("arch=haswell")))
 int	ft_strlen(char *str)
@@ -106,5 +107,5 @@ void	_start(int argc, char *argv[])
 	str = "Wello Horld!\n";
 	len = ft_strlen(str);
 	ft_syscall3(__NR_write, STDOUT_FILENO, (long)str, len);
-	ft_exit(0);
+	ft_exit(EX_OK);
 }

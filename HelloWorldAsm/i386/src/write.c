@@ -14,6 +14,7 @@
 #include <asm/unistd.h>
 #include <unistd.h>
 #include <stddef.h>
+#include <stdlib.h>
 
 /**
  * ft_strlen() - calculates the length of the string pointed to by s, excluding
@@ -66,5 +67,5 @@ void	_start(void)
 	str = "Wello Horld!\n";
 	len = ft_strlen(str);
 	ft_write(STDOUT_FILENO, str, len);
-	ft_exit(0);
+	ft_exit(EXIT_SUCCESS);
 }
