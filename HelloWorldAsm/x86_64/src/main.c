@@ -33,6 +33,7 @@ _my_init:\n\
 MY_FCN
 
 /*
+ * https://hackmd.io/@paolieri/x86_64
  * https://wiki.osdev.org/System_V_ABI#x86-64
  * https://people.cs.rutgers.edu/~pxk/419/notes/frames.html
  * https://eli.thegreenplace.net/2011/09/06/stack-frame-layout-on-x86-64/
@@ -111,7 +112,7 @@ int	main(void)
 	size_t len;
 
 	str = "Wello Horld!\n";
-	len = ft_strlen(str);
+	len = strlen(str);
 	/* write(STDOUT_FILENO,"Hey!\n", 5); */
 	syscall(SYS_write, STDOUT_FILENO, str, len);
 	/* syscall(SYS_write, STDOUT_FILENO, str, myfcn(str, 5)); */

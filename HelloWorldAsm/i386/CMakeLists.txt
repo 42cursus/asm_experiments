@@ -89,6 +89,8 @@ set(TARGET_CFLAGS
         -fno-exceptions
         -ffunction-sections
         -fdata-sections
+        -fno-common
+        -fno-builtin
         -fomit-frame-pointer # Don't keep the frame pointer in a register for functions that don't need one.
         -g3
         -ggdb

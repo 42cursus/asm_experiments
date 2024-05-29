@@ -21,7 +21,8 @@
  * the terminating null byte ('\0').
  * Returns the number of bytes in the string pointed to by s.
  */
-size_t __attribute__ ((noinline))	ft_strlen(const char *s)
+__attribute__ ((noinline))
+size_t	ft_strlen(const char *s)
 {
 	const char	*o = s;
 	ptrdiff_t	diff;
