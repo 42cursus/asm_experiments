@@ -1,5 +1,8 @@
 
 ### To start with:
+* [CPU registers](https://datacadamia.com/computer/cpu/register/general)
+* [Segmentation](https://datacadamia.com/computer/memory/segment/segment)
+* 
 * [main_function](https://en.cppreference.com/w/c/language/main_function)
 * [startup](https://www.gnu.org/software/hurd/glibc/startup.html)
 * [__libc_start_main](https://refspecs.linuxbase.org/LSB_3.1.1/LSB-Core-generic/LSB-Core-generic/baselib---libc-start-main-.html)
@@ -13,6 +16,7 @@
 * https://wiki.osdev.org/System_V_ABI#x86-64
 * https://people.cs.rutgers.edu/~pxk/419/notes/frames.html
 * https://eli.thegreenplace.net/2011/09/06/stack-frame-layout-on-x86-64/
+* https://insecure.org/stf/smashstack.html
 
 #### Example representation:
 

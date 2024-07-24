@@ -11,7 +11,6 @@ set print inferior-events on
 show debug-file-directory
 set disassembly-flavor intel
 set debug-file-directory /usr/lib/debug
-directory ~/git/c/42london/push_swap/src
 directory ~/staging/glibc-2.31
 directory ~/staging/glibc-2.31/elf
 directory ~/staging/glibc-2.31/nptl
