@@ -48,3 +48,13 @@ br __call_tls_dtors
 br _dl_fini
 br _fini
 br __on_exit
+
+set mem inaccessible-by-default off
+set follow-fork-mode parent
+#set follow-fork-mode child
+#set follow-exec-mode new
+set follow-exec-mode old
+set detach-on-fork off
+catch fork
+
+
