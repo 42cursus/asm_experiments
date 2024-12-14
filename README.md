@@ -38,8 +38,8 @@
 
 ### How to use assembly in a c code
 
-* https://gcc.gnu.org/onlinedocs/gcc/Constraints.html
-* https://gcc.gnu.org/onlinedocs/gcc/Simple-Constraints.html
-* https://gcc.gnu.org/onlinedocs/gcc/Machine-Constraints.html
-* https://gcc.gnu.org/onlinedocs/gcc/Modifiers.html
-* https://gcc.gnu.org/onlinedocs/gcc/extensions-to-the-c-language-family
+* [https://gcc.gnu.org/onlinedocs/gcc/Constraints.html](https://gcc.gnu.org/onlinedocs/gcc/Constraints.html)
+* [https://gcc.gnu.org/onlinedocs/gcc/Simple-Constraints.html](https://gcc.gnu.org/onlinedocs/gcc/Simple-Constraints.html)
+* [https://gcc.gnu.org/onlinedocs/gcc/Machine-Constraints.html](https://gcc.gnu.org/onlinedocs/gcc/Machine-Constraints.html)
+* [https://gcc.gnu.org/onlinedocs/gcc/Modifiers.html](https://gcc.gnu.org/onlinedocs/gcc/Modifiers.html)
+* [https://gcc.gnu.org/onlinedocs/gcc/C-Extensions.html](https://gcc.gnu.org/onlinedocs/gcc/C-Extensions.html)
