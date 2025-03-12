@@ -1,25 +1,23 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   log2.c                                             :+:      :+:    :+:   */
+/*   main.c                                             :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
 /*   By: abelov <abelov@student.42london.com>       +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2024/05/29 04:55:06 by abelov            #+#    #+#             */
-/*   Updated: 2024/05/29 04:55:07 by abelov           ###   ########.fr       */
+/*   Created: 2025/02/11 17:14:46 by abelov            #+#    #+#             */
+/*   Updated: 2025/02/11 17:14:47 by abelov           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
-static inline unsigned long log2(unsigned long x)
+#include <asm/unistd_32.h>
+
+void	ft_exit(int exit_code)
 {
-	unsigned long r = 0;
-	__asm__(
-		"bsrl %1, %0\n\t"
-		"jnz 1f\n\t"
-		"movl $-1, %0\n\t"
-		"1:\n\t"
-		: "=r" (r)
-		: "r" (x)
-		);
-	return r;
+	__asm__ volatile ("int $0x80" :: "a"(__NR_exit), "b"(exit_code));
+}
+
+void _start(void)
+{
+	ft_exit(42);
 }

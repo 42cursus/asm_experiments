@@ -12,6 +12,7 @@
 
 #include "asm.h"
 #include <sysexits.h>
+#include <stdarg.h>
 
 __attribute__((target("arch=haswell")))
 int	ft_strlen(char *str)
@@ -94,6 +95,38 @@ void	ft_exit(int exit_code)
 		"syscall" /*							; );" */
 		:: [syscall_number] "r" (SYS_exit)
 		: "eax"); /* these registers are clobbered */
+}
+
+/**
+ * syscall arguments are typically passed in registers and interpreted
+ * as integers or pointers, which are effectively the same size.
+ *
+ * Use the syscall instruction (direct syscall implementation).
+ * Get up to 6 arguments (Linux syscall ABI typically supports up to 6 args)
+ *
+ * @see https://fschoenberger.dev/syscalls-by-hand/
+ */
+long	ft_syscall_x64(long num, ...)
+{
+	va_list				args;
+	long				result;
+	register long r10	__asm__("r10");
+	register long r8	__asm__("r8");
+	register long r9	__asm__("r9");
+
+	va_start(args, num);
+	r10 = va_arg(args, long);
+	r8 = va_arg(args, long);
+	r9 = va_arg(args, long);
+	va_end(args);
+	__asm__ __volatile__ (
+			"syscall"
+			: "=a" (result)
+			: "a" (num), "D" (va_arg(args, long)), "S" (va_arg(args, long)),
+	"d"(va_arg(args, long)), "r"(r10), "r"(r8), "r"(r9)
+			: "rcx", "r11", "memory"
+			);
+	return (result);
 }
 
 /**

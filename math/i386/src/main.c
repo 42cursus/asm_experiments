@@ -1,25 +1,27 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   log2.c                                             :+:      :+:    :+:   */
+/*   main.c                                             :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
 /*   By: abelov <abelov@student.42london.com>       +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2024/05/29 04:55:06 by abelov            #+#    #+#             */
-/*   Updated: 2024/05/29 04:55:07 by abelov           ###   ########.fr       */
+/*   Created: 2025/03/12 13:58:36 by abelov            #+#    #+#             */
+/*   Updated: 2025/03/12 13:58:37 by abelov           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
-static inline unsigned long log2(unsigned long x)
+#include <asm/unistd.h>
+
+float int_to_float_x87(int x);
+int float_to_int_x87(float f);
+
+void ft_exit(int exit_code) {
+	__asm__ volatile ("int $0x80"::"a"(__NR_exit), "b"(exit_code));
+}
+
+int main(void)
 {
-	unsigned long r = 0;
-	__asm__(
-		"bsrl %1, %0\n\t"
-		"jnz 1f\n\t"
-		"movl $-1, %0\n\t"
-		"1:\n\t"
-		: "=r" (r)
-		: "r" (x)
-		);
-	return r;
+	float f = int_to_float_x87(-42);
+	int i = float_to_int_x87(-42.9f);
+	return (i);
 }

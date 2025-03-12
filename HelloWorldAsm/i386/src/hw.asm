@@ -1,3 +1,5 @@
+; nasm -f elf -o hw.o hw.asm
+; ld -m elf_i386 -s -o hw hw.o
 BITS 32
 
 section .text                   ;section declaration

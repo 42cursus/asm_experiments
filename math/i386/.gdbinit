@@ -1,18 +1,30 @@
 # **************************************************************************** #
 #                                                                              #
 #                                                         :::      ::::::::    #
-#    CMakeLists.txt                                     :+:      :+:    :+:    #
+#    .gdbinit                                           :+:      :+:    :+:    #
 #                                                     +:+ +:+         +:+      #
 #    By: abelov <abelov@student.42london.com>       +#+  +:+       +#+         #
 #                                                 +#+#+#+#+#+   +#+            #
-#    Created: 2025/03/12 00:41:22 by abelov            #+#    #+#              #
-#    Updated: 2025/03/12 00:41:23 by abelov           ###   ########.fr        #
+#    Created: 2025/03/12 01:05:48 by abelov            #+#    #+#              #
+#    Updated: 2025/03/12 01:05:49 by abelov           ###   ########.fr        #
 #                                                                              #
 # **************************************************************************** #
 
-cmake_minimum_required(VERSION 3.8.2)
+set confirm off
+set pagination off
+set height unlimited
+#set verbose on
+#set logging on
+set trace-commands on
+set print inferior-events on
 
-project(HelloWorldAsm LANGUAGES C ASM)
+set breakpoint pending on
+set mem inaccessible-by-default off
 
-add_subdirectory(i386)
-add_subdirectory(x86_64)
+br _start
+
+tui enable
+set tui border-mode reverse
+list _start
+#tui reg sse
+tui reg float
