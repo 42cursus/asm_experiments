@@ -28,7 +28,7 @@ project(syscall_x86_64 LANGUAGES C ASM_NASM)
 #==============================================================================#
 
 file(GLOB TARGET_HEADERS "src/*.h")
-file(GLOB TARGET_SOURCES "src/syscall.c")
+file(GLOB TARGET_SOURCES "src/syscall.c" "src/libc_read.c")
 set(EXECUTABLE syscall_x86_64)
 set(TARGET_LINK_FLAGS -w -lbsd -O0 -m64 -nostdlib -Wl,-melf_x86_64)
 set(TARGET_CFLAGS

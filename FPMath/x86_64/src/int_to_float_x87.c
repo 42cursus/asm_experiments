@@ -31,9 +31,11 @@ float int_to_float_x87(int x)
 	 * fildq  quad    # Load 64-bit integer
 	 */
 	__asm__ volatile (
-			"filds %1\n\t"  // Load the integer onto the FPU stack.
-			"fstpl %0"    	// Store the float back to memory.
-			: "=m"(f)
-			: "m"(x));
+		"filds %1\n\t"  // Load the integer onto the FPU stack.
+		"fstps %0"    	// Store the float back to memory.
+		: "=m"(f)
+		: "m"(x)
+		: "st"
+	);
 	return (f);
 }

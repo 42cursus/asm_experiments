@@ -12,7 +12,7 @@
 
 cmake_minimum_required(VERSION 3.8.2)
 
-project(math LANGUAGES C ASM)
+project(FPMath LANGUAGES C ASM)
 
 add_subdirectory(i386)
 add_subdirectory(x86_64)

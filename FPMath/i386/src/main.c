@@ -11,6 +11,7 @@
 /* ************************************************************************** */
 
 #include <asm/unistd.h>
+#include <unistd.h>
 
 float int_to_float_x87(int x);
 int float_to_int_x87(float f);
@@ -23,5 +24,6 @@ int main(void)
 {
 	float f = int_to_float_x87(-42);
 	int i = float_to_int_x87(-42.9f);
+	_exit(i);
 	return (i);
 }

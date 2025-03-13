@@ -10,6 +10,11 @@
 /*                                                                            */
 /* ************************************************************************** */
 
+/**
+ * https://gcc.gnu.org/onlinedocs/gcc/Extended-Asm.html
+ * @param f
+ * @return
+ */
 int float_to_int_x87(float f)
 {
 	int i;
@@ -21,12 +26,12 @@ int float_to_int_x87(float f)
 	 * https://www.felixcloutier.com/x86/fist:fistp
 	 */
 	__asm__ volatile (
-			"flds %1\n"  // Load 32-bit float onto FPU stack
-			"fistpl %0"  // Store as 32-bit integer (truncating)
-			: "=m"(i)
-			: "m"(f)
-			: 	// The clobber list is empty because we do not explicitly
-			);	// modify general-purpose registers—only the x87 FPU stack
+		"fld %1\n"  // Load 32-bit float onto FPU stack
+		"fistp %0"  // Store as 32-bit integer (truncating)
+		: "=m"(i)
+		: "m"(f)
+		: "st" // https://gcc.gnu.org/onlinedocs/gcc/Extended-Asm.html#Clobbers-and-Scratch-Registers
+	);
 	return (i);
 }
 

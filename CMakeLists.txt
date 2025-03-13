@@ -16,5 +16,5 @@ set(CMAKE_C_COMPILER gcc)
 
 project(asm_experiments LANGUAGES C ASM)
 add_subdirectory(HelloWorldAsm)
-add_subdirectory(math)
+add_subdirectory(FPMath)
 add_subdirectory(SysCall)
