@@ -1,0 +1,3 @@
+[submodule "ieeelib"]
+	path = ieeelib
+	url = git@github.com:ant6n/ieeelib.git

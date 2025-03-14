@@ -16,7 +16,7 @@
 #define attribute_hidden
 #define IS_IN(lib) 1
 
-#include <asm/unistd_32.h>
+#include <asm/unistd.h>
 #include <sys/types.h>
 #include <unistd.h>
 

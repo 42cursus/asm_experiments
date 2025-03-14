@@ -16,6 +16,7 @@ HelloWorldAsm/i386/src/hw
 HelloWorldAsm/i386/hw_main_i386
 HelloWorldAsm/i386/write_i386
 FPMath/i386/math_i386
+FPMath/x86_64/float_x86_64
 SysCall/i386/syscall_main_i386
 SysCall/i386/syscall_i386
 SysCall/x86_64/syscall_x86_64
@@ -194,3 +195,4 @@ Icon
 Network Trash Folder
 Temporary Items
 .apdisk
+

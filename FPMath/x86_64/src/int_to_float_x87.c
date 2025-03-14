@@ -1,12 +1,12 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   intToFloat.c                                       :+:      :+:    :+:   */
+/*   int_to_float_x87.c                                 :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
 /*   By: abelov <abelov@student.42london.com>       +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/03/12 00:40:35 by abelov            #+#    #+#             */
-/*   Updated: 2025/03/12 00:40:36 by abelov           ###   ########.fr       */
+/*   Updated: 2025/03/14 00:11:53 by abelov           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -15,6 +15,7 @@
  * @param x
  * @return
  */
+__attribute__((ms_abi))
 float int_to_float_x87(int x)
 {
 	float f;
@@ -31,11 +32,11 @@ float int_to_float_x87(int x)
 	 * fildq  quad    # Load 64-bit integer
 	 */
 	__asm__ volatile (
-		"filds %1\n\t"  // Load the integer onto the FPU stack.
-		"fstps %0"    	// Store the float back to memory.
+		"fildl %1\n"  /* Load the integer onto the FPU stack. */
+		"fstps %0"    /* Store the float back to memory. */
 		: "=m"(f)
 		: "m"(x)
-		: "st"
+		:
 	);
 	return (f);
 }

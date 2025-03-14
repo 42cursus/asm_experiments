@@ -35,31 +35,32 @@ directory ~/staging/glibc-2.31/sysdeps/x86_64
 directory ~/staging/glibc-2.31/sysdeps/x86_64/multiarch
 directory ~/git/c/coreutils/src
 dir src
+
 set breakpoint pending on
-br _start
-br _dl_start
-br _dl_start_final
-br _dl_start_user
-br _dl_init
-br _init
-br dl-sysdep.c:117
-br dl-sysdep.c:252
-br rtld.c:449
-br dl-init:118
-br check_stdfiles_vtables
-br _start
-br libc-start.c:308
-br libc-start.c:339
-br libc-start.c:342
+#br _start
+#br _dl_start
+#br _dl_start_final
+#br _dl_start_user
+#br _dl_init
+#br _init
+#br dl-sysdep.c:117
+#br dl-sysdep.c:252
+#br rtld.c:449
+#br dl-init:118
+#br check_stdfiles_vtables
+#br _start
+#br libc-start.c:308
+#br libc-start.c:339
+#br libc-start.c:342
 br main
 br exit
 br _exit
-br __GI__exit
-br __run_exit_handlers
-br __call_tls_dtors
-br _dl_fini
-br _fini
-br __on_exit
+#br __GI__exit
+#br __run_exit_handlers
+#br __call_tls_dtors
+#br _dl_fini
+#br _fini
+#br __on_exit
 
 set mem inaccessible-by-default off
 set follow-fork-mode parent

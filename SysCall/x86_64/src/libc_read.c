@@ -31,6 +31,8 @@ int	__set_errno(int n)
 
 /**
  * https://fschoenberger.dev/syscalls-by-hand/
+ *
+ * extra local variables to address __fastcall vs __cdecl vs __stdcall
  * @param fd
  * @param buf
  * @param nbytes
