@@ -103,3 +103,6 @@ While using constraints, for more precise control over the effects of constraint
     -Wl,-znoexecstack
     -Wl,-znoexecflags
     -O0 main.c`
+
+`nasm -f elf -o hw.o hw.asm`
+`ld -m elf_i386 -s -o hw hw.o`

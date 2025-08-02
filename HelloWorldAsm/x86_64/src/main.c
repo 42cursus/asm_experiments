@@ -12,6 +12,9 @@
 
 #include "asm.h"
 #include <stdlib.h>
+#include <string.h>
+#include <unistd.h>
+#include <asm/unistd.h>
 
 /**
  * https://people.cs.rutgers.edu/~pxk/419/notes/frames.html
@@ -116,5 +119,6 @@ int	main(void)
 	/* write(STDOUT_FILENO,"Hey!\n", 5); */
 	syscall(SYS_write, STDOUT_FILENO, str, len);
 	/* syscall(SYS_write, STDOUT_FILENO, str, myfcn(str, 5)); */
+	write(STDOUT_FILENO, str, len);
 	return (EXIT_SUCCESS);
 }

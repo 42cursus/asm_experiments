@@ -16,3 +16,4 @@ project(FPMath LANGUAGES C ASM)
 
 add_subdirectory(i386)
 add_subdirectory(x86_64)
+add_subdirectory(common)
